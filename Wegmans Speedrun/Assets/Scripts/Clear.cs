@@ -19,11 +19,5 @@ public class Clear : MonoBehaviour {
         Debug.Log("cleared");
     }
 
-    void OnMouseUpAsButton()
-    {
-        Debug.Log("reset");
-        GameObject.Find("Swipe").GetComponent<TrailRenderer>().time = Mathf.Infinity;
-    }
-
     
 }
