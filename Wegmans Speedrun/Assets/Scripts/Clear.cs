@@ -14,7 +14,8 @@ public class Clear : MonoBehaviour {
 
     public void ClearScreen()
     {
-        GameObject.Find("Swipe").GetComponent<TrailRenderer>().time = 0;
+        //GL.Clear(true, true, Color.black);
+        GameObject.Find("Swipe").GetComponent<TrailRenderer>().Clear();
         Debug.Log("cleared");
     }
 
@@ -23,4 +24,6 @@ public class Clear : MonoBehaviour {
         Debug.Log("reset");
         GameObject.Find("Swipe").GetComponent<TrailRenderer>().time = Mathf.Infinity;
     }
+
+    
 }
