@@ -11,7 +11,7 @@ public enum DefendSpell
 {
     Counter,
     Block,
-    Heal
+    Shield
 }
 
 public class WizHARD : MonoBehaviour {
@@ -37,7 +37,7 @@ public class WizHARD : MonoBehaviour {
 
     private void Defend()
     {
-
+        int spellIndex = Random.Range(0, defSpellPool.Count - 1);
     }
 
     private void Attack()
