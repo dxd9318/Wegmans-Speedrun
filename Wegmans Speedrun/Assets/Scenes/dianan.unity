@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 661822819}
   - component: {fileID: 661822818}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,8 +295,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78a60ca0adb0774ca02e25f6f07a8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect: {fileID: 0}
-  speed: 0.5
+  speed: {x: 10, y: 10}
+  direction: {x: 5, y: 0}
+  isLinkedToCamera: 1
+  isLooping: 1
 --- !u!114 &661822819
 MonoBehaviour:
   m_ObjectHideFlags: 0
