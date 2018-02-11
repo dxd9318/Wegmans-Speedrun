@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour {
 
@@ -8,11 +9,18 @@ public class TurnManager : MonoBehaviour {
     public GameObject p;
     public GameObject e;
 
+    public Text playerA;
+    public Text playerD;
+    public Text enemyA;
+    public Text enemyD;
+
     private WizHARD enemy;
     private PathDetection player;
 
     private Health plHealth;
     private Health enHealth;
+
+    private Timer tim;
 
     private float timer;
     public float startTimer;
@@ -27,7 +35,9 @@ public class TurnManager : MonoBehaviour {
         plHealth = GameObject.Find("Player").GetComponent<Health>();
         enHealth = e.GetComponent<Health>();
 
-        timer = startTimer;
+        tim = GameObject.Find("Canvas").GetComponent<Timer>();
+
+        tim.timeLeft = timer = startTimer;
 
         last = "";
 	}
@@ -40,12 +50,17 @@ public class TurnManager : MonoBehaviour {
     void SwitchTurns()
     {
         //reset the time
-        timer = startTimer;
+        tim.timeLeft = timer = startTimer;
         //switch the bools
         enemy.myTurn = !enemy.myTurn;
         player.myTurn = !player.myTurn;
         last = "";
         player.lastSpell = "";
+
+        playerA.enabled = !playerA.enabled;
+        playerD.enabled = !playerD.enabled;
+        enemyA.enabled = !enemyA.enabled;
+        enemyD.enabled = !enemyD.enabled;
     }
 
     void PlayerDefense()
@@ -55,7 +70,7 @@ public class TurnManager : MonoBehaviour {
         last = player.lastSpell;
 
         //start the timer
-        timer -= Time.deltaTime;
+        tim.timeLeft = timer -= Time.deltaTime;
 
         if(timer <=0 )
         {
@@ -92,7 +107,7 @@ public class TurnManager : MonoBehaviour {
         last = player.lastSpell;
 
         //start the timer
-        timer -= Time.deltaTime;
+        tim.timeLeft = timer -= Time.deltaTime;
 
         if (timer <= 0)
         {

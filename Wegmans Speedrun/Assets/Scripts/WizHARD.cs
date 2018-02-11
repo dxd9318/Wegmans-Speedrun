@@ -42,14 +42,14 @@ public class WizHARD : MonoBehaviour {
 
     public void Defend()
     {
-        int spellIndex = Random.Range(0, defSpellPool.Count - 1);
+        int spellIndex = Random.Range(0, defSpellPool.Count);
 
         float block = 1;
         switch ((DefendSpell)spellIndex)
         {
             case DefendSpell.Failure:
                 Debug.Log("he fail");
-                block = 0;
+                block = 1;
                 break;
             case DefendSpell.Block:
                 Debug.Log("he bloc");
@@ -57,7 +57,7 @@ public class WizHARD : MonoBehaviour {
                 break;
             case DefendSpell.Shield:
                 Debug.Log("he sheld");
-                block = 1;
+                block = 0;
                 break;
         }
 
@@ -68,7 +68,7 @@ public class WizHARD : MonoBehaviour {
     private void Attack()
     {
         
-        int spellIndex = Random.Range(0, atkSpellPool.Count - 1);
+        int spellIndex = Random.Range(0, atkSpellPool.Count);
         Debug.LogWarning(spellIndex);
         switch ((AttackSpell)spellIndex)
         {
