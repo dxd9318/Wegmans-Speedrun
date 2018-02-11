@@ -9,6 +9,7 @@ public class PathDetection : MonoBehaviour {
     //nodes for spells
     public GameObject node;
     private GameObject lastNode;
+    private float height;
 
     //grid for spells
     private List<GameObject> grid = new List<GameObject>();
@@ -19,14 +20,17 @@ public class PathDetection : MonoBehaviour {
     private List<int> fireBall = new List<int>();
 
     //array of all spells
-    private int[] spellBook;
+    private List<List<int>> spellBook = new List<List<int>>();
+    private List<string> spellNames = new List<string>();
 
 
 	// Use this for initialization
 	void Start () {
-        //build spell arrays      
+        //build spell arrays   
+        BuildSpells();
         lastNode = gameObject;
         CreateGrid();
+        height = Screen.height / 3;
 	}
 
     // Update is called once per frame
@@ -64,7 +68,7 @@ public class PathDetection : MonoBehaviour {
         {
             for(int j = 0; j < 3; j++)
             {
-                Vector3 spawnPT = new Vector3(70 + (i * 105), 35 + (j * 80), 1);
+                Vector3 spawnPT = new Vector3(Screen.width/6 + (Screen.width/3 * i), (Screen.height/6 + (Screen.height/3 * j)) / 3, 0);
                 Vector3 spawn = cam.ScreenToWorldPoint(spawnPT);
                 spawn.z = 0;
                 GameObject newNode = Instantiate(node,spawn, Quaternion.identity);
@@ -87,20 +91,69 @@ public class PathDetection : MonoBehaviour {
         fireBall.Add(7);
         fireBall.Add(8);
         fireBall.Add(9);
-
+        spellBook.Add(fireBall);
+        spellNames.Add("fireball");
 
     }
 
     void CheckPath()
+    {        
+        //check each spell to see if the players path matches
+        for(int i = 0; i < spellBook.Count; i ++)
+        {
+            if(CompareLists(spellBook[i], playerPath))
+            {
+                CastSpell(spellNames[i]);
+                return;// FIGURE OUT WHERE THIS GOES
+            }
+        }
+        //if does not match a spell
+        CastSpell("failure");
+    }
+
+    bool CompareLists(List<int> list1, List<int> list2)
+    {       
+        bool eq = false;
+
+        if (list1.Count != list2.Count)
+        {
+            return false;
+        }
+
+        for(int i = 0; i < list1.Count; i++)
+        {
+            if(list1[i] != list2[i])
+            {
+                eq = false;
+                break;
+            }
+            else
+            {
+                eq = true;
+            }
+        }
+        return eq;        
+    }
+
+        void CastSpell(string spell)
     {
-        
+         switch(spell)
+        {
+            case "fireball":
+                Debug.Log("FIREBALL");
+                break;
+            case "failure":
+                Debug.Log("FAILURE");
+                break;
+
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         GameObject nodeTouched = other.gameObject;
-       // Debug.Log(nodeTouched.name);
+       //Debug.Log(nodeTouched.name);
        
         if(lastNode.name != nodeTouched.name)
         {
@@ -114,6 +167,7 @@ public class PathDetection : MonoBehaviour {
     {
         playerPath.Clear();
         lastNode = gameObject;
+        Debug.Log("CLEAR");
     }
 }
 
