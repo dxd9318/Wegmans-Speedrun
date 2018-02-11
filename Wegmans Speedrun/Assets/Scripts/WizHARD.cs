@@ -35,7 +35,7 @@ public class WizHARD : MonoBehaviour {
 		if(myTurn && attacked == false)
         {
             attacked = false;
-            Invoke("Attack", Random.Range(2f, 7f));
+            Invoke("Attack", Random.Range(2f, 4f));
             
         }
 	}

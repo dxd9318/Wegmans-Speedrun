@@ -1206,7 +1206,7 @@ MonoBehaviour:
   playerD: {fileID: 509915900}
   enemyA: {fileID: 344642633}
   enemyD: {fileID: 1329670476}
-  startTimer: 7
+  startTimer: 4
   last: 
 --- !u!1 &1352198176
 GameObject:
