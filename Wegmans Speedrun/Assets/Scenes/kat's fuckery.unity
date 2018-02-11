@@ -214,7 +214,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.7941176, g: 0.07590828, b: 0.07590828, a: 1}
-      key1: {r: 0.9044118, g: 0.5521865, b: 0.106401384, a: 1}
+      key1: {r: 0.9044118, g: 0.5521865, b: 0.106401384, a: 0}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -229,7 +229,7 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 57247
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7effeb98253fa43ac990d50df9e287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToFade: 3
+  timeToFade: 1
 --- !u!1 &1816231286
 GameObject:
   m_ObjectHideFlags: 0
