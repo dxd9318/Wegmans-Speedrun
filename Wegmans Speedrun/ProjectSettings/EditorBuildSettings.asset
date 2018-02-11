@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/shanno.unity
     guid: 84eb0d278618fd04bb33f096b6cbc705
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/kat's fuckery.unity
     guid: a279a7e9fdac0c348a8ac41384f0f841
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: d950dfa3c2b257c479f35d1de89a5dde
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 7d99a90a969d78d4a95f5894c03ec9fc

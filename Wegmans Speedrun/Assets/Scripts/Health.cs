@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
 
@@ -23,6 +24,17 @@ public class Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         healthBar.value = (float)health/startHealth;
+
+        if(health <= 0)
+        {
+            switch(gameObject.name)
+            {
+                case "Player": SceneManager.LoadScene("Lose");
+                    break;
+                case "Enemy": SceneManager.LoadScene("Win");
+                    break;
+            }
+        }
 	}
 
     public void TakeDamage(float damage, float mod)
