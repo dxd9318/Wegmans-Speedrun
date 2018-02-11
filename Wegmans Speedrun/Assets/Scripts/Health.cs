@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
 
-    public int startHealth;//starting health for this entity
-    private int health;
+    public float startHealth;//starting health for this entity
+    private float health;
 
     public Slider healthBar;
+
+    public string hitRecieved;
+    public float damageTaken;
+
+    public float blockMod = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,13 +25,13 @@ public class Health : MonoBehaviour {
         healthBar.value = (float)health/startHealth;
 	}
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage, float mod)
     {
-        health -= damage;
+        health -= damage * mod;
         Debug.Log(gameObject.name+"health: "+health);
     }
 
-    public void RestoreHealth(int healthRestored)
+    public void RestoreHealth(float healthRestored)
     {
         health += healthRestored;
     }

@@ -9,6 +9,7 @@ public class PathDetection : MonoBehaviour {
     //nodes for spells
     public GameObject node;
     private GameObject lastNode;
+
     
     private float height;
 
@@ -28,6 +29,9 @@ public class PathDetection : MonoBehaviour {
     private List<List<int>> spellBook = new List<List<int>>();
     private List<string> spellNames = new List<string>();
 
+    public bool myTurn = false;
+    public string lastSpell;
+
     //test stuff
     public GameObject bg;
     private SpriteRenderer sr;
@@ -41,6 +45,9 @@ public class PathDetection : MonoBehaviour {
         CreateGrid();
 
         sr = bg.GetComponent<SpriteRenderer>();
+
+        //nothing
+        lastSpell = "";
 	}
 
     // Update is called once per frame
@@ -51,11 +58,12 @@ public class PathDetection : MonoBehaviour {
 
         if(Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
         {
+            lastSpell = "";
             CheckPath();
             ResetPlayerPath();
         }
 
-       
+
     }
 
     //find node locations
@@ -183,12 +191,17 @@ public class PathDetection : MonoBehaviour {
         return eq;        
     }
 
-        void CastSpell(string spell)
+    void CastSpell(string spell)
     {
          switch(spell)
         {
             case "fireball":
                 Debug.Log("FIREBALL");
+                if(!myTurn)
+                {
+                    spell = "failure";
+                }
+                lastSpell = "fireball";
                 sr.color = Color.red;
                 break;
             case "block1":
@@ -196,21 +209,26 @@ public class PathDetection : MonoBehaviour {
             case "block3":
                 Debug.Log("BLOCK");
                 sr.color = Color.gray;
+                lastSpell = "block";
                 break;
             case "shield":
                 Debug.Log("SHIELD");
                 sr.color = Color.blue;
+                lastSpell = "shield";
                 break;
             case "counter":
                 Debug.Log("COUNTER");
                 sr.color = Color.yellow;
+                lastSpell = "counter";
                 break;
             case "failure":
                 Debug.Log("FAILURE");
                 sr.color = Color.white;
+                lastSpell = "failure";
                 break;
 
         }
+
     }
 
 
@@ -231,6 +249,7 @@ public class PathDetection : MonoBehaviour {
     {
         playerPath.Clear();
         lastNode = gameObject;
+        
         Debug.Log("CLEAR");
     }
 }
