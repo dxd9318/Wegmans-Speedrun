@@ -9,10 +9,15 @@ public class Clear : MonoBehaviour {
     private bool drawing = false;
     private TrailRenderer tr;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject bg;
+    private SpriteRenderer sr;
+
+    // Use this for initialization
+    void Start () {
         timer = timeToFade;
         tr = gameObject.GetComponent<TrailRenderer>();
+
+        sr = bg.GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -48,6 +53,8 @@ public class Clear : MonoBehaviour {
         //GL.Clear(true, true, Color.black);
         tr.Clear();
         Debug.Log("cleared");
+
+        sr.color = Color.white;
 
         //StartCoroutine(Fade());
     }
