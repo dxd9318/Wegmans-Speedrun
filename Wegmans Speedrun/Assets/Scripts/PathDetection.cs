@@ -9,6 +9,7 @@ public class PathDetection : MonoBehaviour {
     //nodes for spells
     public GameObject node;
     private GameObject lastNode;
+    
     private float height;
 
     //grid for spells
@@ -18,19 +19,28 @@ public class PathDetection : MonoBehaviour {
 
     //arrays storing lists of nodes to hit for spells
     private List<int> fireBall = new List<int>();
+    private List<int> block1 = new List<int>();
+    private List<int> block2 = new List<int>();
+    private List<int> block3 = new List<int>();
+    private List<int> shield = new List<int>();
 
     //array of all spells
     private List<List<int>> spellBook = new List<List<int>>();
     private List<string> spellNames = new List<string>();
 
+    //test stuff
+    public GameObject bg;
+    private SpriteRenderer sr;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         //build spell arrays   
         BuildSpells();
         lastNode = gameObject;
         CreateGrid();
-        height = Screen.height / 3;
+
+        sr = bg.GetComponent<SpriteRenderer>();
 	}
 
     // Update is called once per frame
@@ -83,6 +93,7 @@ public class PathDetection : MonoBehaviour {
     void BuildSpells()
     {
         //fireball
+        //basic attack (med damage, med difficulty)
         //3,2,1,6,7,8,9 (W shaped)
         fireBall.Add(3);
         fireBall.Add(2);
@@ -94,6 +105,43 @@ public class PathDetection : MonoBehaviour {
         spellBook.Add(fireBall);
         spellNames.Add("fireball");
 
+        //block
+        //halves damage (low dif)
+        //3,6,9
+        //2,5,8
+        //1,4,7
+        block1.Add(3);
+        block1.Add(6);
+        block1.Add(9);
+        block2.Add(2);
+        block2.Add(5);
+        block2.Add(8);
+        block3.Add(1);
+        block3.Add(4);
+        block3.Add(7);
+        spellBook.Add(block1);
+        spellNames.Add("block1");
+        spellBook.Add(block2);
+        spellNames.Add("block2");
+        spellBook.Add(block3);
+        spellNames.Add("block3");
+
+        //shield
+        //blocks damage (med dif)
+        //1,2,3,6,9,8,7 (U shaped)
+        shield.Add(1);
+        shield.Add(2);
+        shield.Add(3);
+        shield.Add(6);
+        shield.Add(9);
+        shield.Add(8);
+        shield.Add(7);
+        spellBook.Add(shield);
+        spellNames.Add("shield");
+
+        //counter
+        //reflects damage (high difficulty)
+
     }
 
     void CheckPath()
@@ -104,7 +152,7 @@ public class PathDetection : MonoBehaviour {
             if(CompareLists(spellBook[i], playerPath))
             {
                 CastSpell(spellNames[i]);
-                return;// FIGURE OUT WHERE THIS GOES
+                return;
             }
         }
         //if does not match a spell
@@ -141,9 +189,25 @@ public class PathDetection : MonoBehaviour {
         {
             case "fireball":
                 Debug.Log("FIREBALL");
+                sr.color = Color.red;
+                break;
+            case "block1":
+            case "block2":
+            case "block3":
+                Debug.Log("BLOCK");
+                sr.color = Color.gray;
+                break;
+            case "shield":
+                Debug.Log("SHIELD");
+                sr.color = Color.blue;
+                break;
+            case "counter":
+                Debug.Log("COUNTER");
+                sr.color = Color.yellow;
                 break;
             case "failure":
                 Debug.Log("FAILURE");
+                sr.color = Color.white;
                 break;
 
         }
