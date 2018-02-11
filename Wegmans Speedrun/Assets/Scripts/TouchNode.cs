@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TouchNode : MonoBehaviour {
 
+    private bool isActivated = false;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,8 +16,11 @@ public class TouchNode : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        
+        if(col.gameObject.name == "Swipe")
+        {
+            isActivated = true;
+        }
     }
 }
